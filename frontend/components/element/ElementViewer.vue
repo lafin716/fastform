@@ -1,20 +1,14 @@
 <script setup lang="ts">
-import { computed, shallowRef, markRaw, defineProps } from "vue";
-import { ElementMeta, ElementTypeData } from "@/types/fastform/Element.js";
-import TextElement from "./TextElement.vue";
-import TextAreaElement from "./TextAreaElement.vue";
+import { computed, markRaw, defineProps } from "vue";
+import { Element } from "@/types/fastform/Element.js";
+import { elementMap } from "./elementData.js";
 
 const props = defineProps<{
-  elementData: ElementMeta;
+  elementData: Element;
 }>();
 
-const elementMap = {
-  [ElementTypeData.TEXT.id]: TextElement,
-  [ElementTypeData.TEXTAREA.id]: TextAreaElement,
-};
-
 const selectedElement = computed(() => {
-  return markRaw(elementMap[props.elementData.type.id]);
+  return markRaw(elementMap[props.elementData.type.id].preview);
 });
 </script>
 <template>

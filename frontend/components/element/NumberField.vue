@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { defineProps, computed } from "vue";
-import { ElementMeta, ElementTypeData } from "@/types/fastform/Element.js";
+import { ElementMeta } from "@/types/fastform/Element.js";
 
 const props = defineProps<{
   elementData: ElementMeta;
@@ -11,5 +11,5 @@ const elementData = computed(() => {
 });
 </script>
 <template>
-  <v-text-field :label="elementData.label" variant="outlined" />
+  <v-text-field :label="elementData.label" type="number" variant="outlined" />
 </template>

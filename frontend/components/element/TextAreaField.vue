@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { defineProps, computed } from "vue";
-import { ElementMeta, ElementTypeData } from "@/types/fastform/Element.js";
+import { ElementMeta } from "@/types/fastform/Element.js";
 
 const props = defineProps<{
   elementData: ElementMeta;

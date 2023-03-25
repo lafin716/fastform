@@ -12,4 +12,5 @@ export default defineNuxtConfig({
   nitro: {
     serveStatic: true,
   },
+  modules: ["@pinia/nuxt"],
 });
