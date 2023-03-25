@@ -2,14 +2,20 @@
 import ContentCard from "@/components/layout/part/ContentCard.vue";
 import { ElementTypeData } from "@/components/element/elementData";
 import { useElementStore } from "@/stores/elementStore";
+import { useElementDataStore } from "@/stores/elementDataStore";
 
 const store = useElementStore();
+const dataStore = useElementDataStore();
+const saveElement = () => {
+  dataStore.data = store.serialize();
+  console.log(store.serialize());
+};
 </script>
 <template>
   <div>
     <ContentCard title="입력항목 만들기">
       <template v-slot:actions>
-        <v-btn class="bg-success">저장</v-btn>
+        <v-btn class="bg-success" @click="saveElement">저장</v-btn>
       </template>
       <template v-slot:contents>
         <v-row class="ml-0 mr-0">
