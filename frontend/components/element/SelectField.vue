@@ -1,19 +1,14 @@
 <script setup lang="ts">
-import { ref, defineProps, computed } from "vue";
-import { ElementMeta } from "@/types/fastform/Element.js";
+import { useElementStore } from "@/stores/elementStore";
 
-const props = defineProps<{
-  elementData: ElementMeta;
-}>();
-
-const elementData = computed(() => {
-  return props.elementData;
-});
-
-const items = computed(() => {
-  return [];
-});
+const store = useElementStore();
 </script>
 <template>
-  <v-select :label="elementData.label" :items="items" variant="outlined" />
+  <v-select
+    :label="store.label"
+    :items="store.data.items"
+    item-title="text"
+    item-value="value"
+    variant="outlined"
+  />
 </template>

@@ -1,15 +1,16 @@
 <script setup lang="ts">
-import { defineProps, computed } from "vue";
-import { ElementMeta } from "@/types/fastform/Element.js";
+import { useElementStore } from "@/stores/elementStore";
 
-const props = defineProps<{
-  elementData: ElementMeta;
-}>();
-
-const elementData = computed(() => {
-  return props.elementData;
-});
+const store = useElementStore();
 </script>
 <template>
-  <v-text-field :label="elementData.label" variant="outlined" />
+  <v-file-input
+    :accept="store.data.accept"
+    :placeholder="store.data.placeholder"
+    :label="store.label"
+    :prepend-icon="store.data.icon"
+    variant="outlined"
+    :multiple="store.data.multiple.value"
+    :chips="true"
+  />
 </template>

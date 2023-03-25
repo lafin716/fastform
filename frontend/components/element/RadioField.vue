@@ -1,18 +1,16 @@
 <script setup lang="ts">
-import { ref, defineProps, computed } from "vue";
-import { ElementMeta } from "@/types/fastform/Element.js";
+import { useElementStore } from "@/stores/elementStore";
+import { computed } from "vue";
 
-const props = defineProps<{
-  elementData: ElementMeta;
-}>();
-
-const elementData = computed(() => {
-  return props.elementData;
+const store = useElementStore();
+const direction = computed(() => {
+  return store.data.direction === "horizontal" ? "row" : "col";
 });
 </script>
 <template>
-  <v-radio-group>
-    <v-radio label="Yes" value="yes"></v-radio>
-    <v-radio label="No" value="no"></v-radio>
+  <v-radio-group :inline="direction === 'row'">
+    <template v-for="(item, index) in store.data.items" :key="index">
+      <v-radio :label="item.text" :value="item.value" variant="outlined" />
+    </template>
   </v-radio-group>
 </template>

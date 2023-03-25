@@ -1,17 +1,13 @@
 <script setup lang="ts">
-import { defineProps, computed } from "vue";
-import { ElementMeta } from "@/types/fastform/Element.js";
+import { useElementStore } from "@/stores/elementStore";
 
-const props = defineProps<{
-  elementData: ElementMeta;
-}>();
-
-const elementData = computed(() => {
-  return props.elementData;
-});
-
-console.log("textarea", props);
+const store = useElementStore();
 </script>
 <template>
-  <v-textarea :label="elementData.label" rows="10" variant="outlined" />
+  <v-textarea
+    :label="store.label"
+    :placeholder="store.data.placeholder"
+    rows="10"
+    variant="outlined"
+  />
 </template>

@@ -1,25 +1,18 @@
 <script setup lang="ts">
-import { defineProps, computed, markRaw } from "vue";
+import { computed, markRaw } from "vue";
 import { useElementStore } from "@/stores/elementStore";
 import { elementMap } from "@/components/element/elementData";
 
 const store = useElementStore();
-const props = defineProps<{
-  elementId: string;
-}>();
+const selectedOptionField = computed(() => {
+  const option = elementMap[store.type.id].component.option;
+  if (option === null) {
+    return null;
+  }
 
-const selectedElement = computed(() => {
-  const id = props.elementId;
-  store.setElement(elementMap[id].element);
+  return markRaw(option);
 });
 </script>
 <template>
-  <v-row class="ml-0 mr-0">
-    <v-col>
-      {{ props }}
-      <v-btn></v-btn>
-      {{ store.element }}
-      {{ selectedElement }}
-    </v-col>
-  </v-row>
+  <component :is="selectedOptionField" />
 </template>

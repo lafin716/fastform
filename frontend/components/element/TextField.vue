@@ -1,22 +1,13 @@
 <script setup lang="ts">
-import { defineProps, computed } from "vue";
-import { TextElement } from "@/types/fastform/Element.js";
-import { TextElementOption } from "@/types/fastform/ElementOption";
+import { useElementStore } from "@/stores/elementStore";
 
-const props = defineProps<{
-  elementData: TextElement;
-}>();
-
-const elementData = computed(() => {
-  console.log(props.elementData);
-  return props.elementData;
-});
-
-const optionData = computed(() => {
-  console.log(props.elementData.data);
-  return props.elementData.data;
-});
+const store = useElementStore();
 </script>
 <template>
-  <v-text-field :label="elementData.label" variant="outlined" />
+  <v-text-field
+    type="text"
+    :label="store.label"
+    :placeholder="store.data.placeholder"
+    variant="outlined"
+  />
 </template>

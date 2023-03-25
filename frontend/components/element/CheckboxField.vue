@@ -1,15 +1,18 @@
 <script setup lang="ts">
-import { ref, defineProps, computed } from "vue";
-import { ElementMeta } from "@/types/fastform/Element.js";
+import { useElementStore } from "@/stores/elementStore";
+import { computed } from "vue";
 
-const props = defineProps<{
-  elementData: ElementMeta;
-}>();
-
-const elementData = computed(() => {
-  return props.elementData;
+const store = useElementStore();
+const direction = computed(() => {
+  return store.data.direction === "horizontal"
+    ? "d-flex flex-row"
+    : "d-flex flex-column";
 });
 </script>
 <template>
-  <v-checkbox :label="elementData.label" />
+  <div :class="direction">
+    <template v-for="(item, index) in store.data.items" :key="index">
+      <v-checkbox :label="item.text" :value="item.value" variant="outlined" />
+    </template>
+  </div>
 </template>

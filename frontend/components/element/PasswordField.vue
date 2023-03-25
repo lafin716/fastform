@@ -1,15 +1,13 @@
 <script setup lang="ts">
-import { defineProps, computed } from "vue";
-import { ElementMeta } from "@/types/fastform/Element.js";
+import { useElementStore } from "@/stores/elementStore";
 
-const props = defineProps<{
-  elementData: ElementMeta;
-}>();
-
-const elementData = computed(() => {
-  return props.elementData;
-});
+const store = useElementStore();
 </script>
 <template>
-  <v-text-field :label="elementData.label" type="password" variant="outlined" />
+  <v-text-field
+    type="password"
+    :label="store.label"
+    :placeholder="store.data.placeholder"
+    variant="outlined"
+  />
 </template>

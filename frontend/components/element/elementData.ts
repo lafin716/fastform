@@ -13,6 +13,11 @@ import SelectField from "./SelectField.vue";
 import FileField from "./FileField.vue";
 import ImageField from "./ImageField.vue";
 import TextOptionFields from "./option/TextOptionFields.vue";
+import SelectOptionFields from "./option/SelectOptionFields.vue";
+import RadioOptionFields from "./option/RadioOptionFields.vue";
+import CheckboxOptionFields from "./option/CheckboxOptionFields.vue";
+import FileOptionFields from "./option/FileOptionFields.vue";
+import ImageOptionFields from "./option/ImageOptionFields.vue";
 
 export type ElementTypeMap = {
   [key: string]: ElementType;
@@ -32,72 +37,85 @@ export const ElementTypeData: ElementTypeMap = {
   SELECT: <ElementType>{ id: "select", label: "셀렉트박스" },
   FILE: <ElementType>{ id: "file", label: "파일첨부" },
   IMAGE: <ElementType>{ id: "image", label: "이미지첨부" },
-  FUNTION: <ElementType>{ id: "funtion", label: "함수" },
 };
 
 export const elementMap = {
   [ElementTypeData.TEXT.id]: {
-    element: <TextElement>{
-      id: "",
-      type: ElementTypeData.TEXT,
-      label: "",
-      data: {},
+    component: {
+      option: TextOptionFields,
+      preview: TextField,
     },
-    component: TextOptionFields,
-    preview: TextField,
   },
   [ElementTypeData.TEXTAREA.id]: {
-    element: <TextElement>{
-      id: "",
-      type: ElementTypeData.TEXT,
-      label: "",
-      data: {},
+    component: {
+      option: TextOptionFields,
+      preview: TextAreaField,
     },
-    component: TextOptionFields,
-    preview: TextAreaField,
   },
   [ElementTypeData.PASSWORD.id]: {
-    component: TextOptionFields,
-    preview: PasswordField,
+    component: {
+      option: TextOptionFields,
+      preview: PasswordField,
+    },
   },
   [ElementTypeData.EMAIL.id]: {
-    component: TextOptionFields,
-    preview: EmailField,
+    component: {
+      option: TextOptionFields,
+      preview: EmailField,
+    },
   },
   [ElementTypeData.NUMBER.id]: {
-    component: TextOptionFields,
-    preview: NumberField,
+    component: {
+      option: TextOptionFields,
+      preview: NumberField,
+    },
   },
   [ElementTypeData.DATE.id]: {
-    component: TextOptionFields,
-    preview: DateField,
+    component: {
+      option: TextOptionFields,
+      preview: DateField,
+    },
   },
   [ElementTypeData.TIME.id]: {
-    component: TextOptionFields,
-    preview: TimeField,
+    component: {
+      option: TextOptionFields,
+      preview: TimeField,
+    },
   },
   [ElementTypeData.DATETIME.id]: {
-    component: TextOptionFields,
-    preview: DatetimeField,
+    component: {
+      option: TextOptionFields,
+      preview: DatetimeField,
+    },
   },
   [ElementTypeData.CHECKBOX.id]: {
-    component: TextOptionFields,
-    preview: CheckboxField,
+    component: {
+      option: CheckboxOptionFields,
+      preview: CheckboxField,
+    },
   },
   [ElementTypeData.RADIO.id]: {
-    component: TextOptionFields,
-    preview: RadioField,
+    component: {
+      option: RadioOptionFields,
+      preview: RadioField,
+    },
   },
   [ElementTypeData.SELECT.id]: {
-    component: TextOptionFields,
-    preview: SelectField,
+    component: {
+      option: SelectOptionFields,
+      preview: SelectField,
+    },
   },
   [ElementTypeData.FILE.id]: {
-    component: TextOptionFields,
-    preview: FileField,
+    component: {
+      option: FileOptionFields,
+      preview: FileField,
+    },
   },
   [ElementTypeData.IMAGE.id]: {
-    component: TextOptionFields,
-    preview: ImageField,
+    component: {
+      option: ImageOptionFields,
+      preview: ImageField,
+    },
   },
 };

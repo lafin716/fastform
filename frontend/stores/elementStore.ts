@@ -1,11 +1,12 @@
 import { defineStore } from "pinia";
+import { ElementTypeData } from "~~/components/element/elementData";
+import { ElementType } from "~~/types/fastform/Element";
 
 export const useElementStore = defineStore("element", () => {
-  const element = ref(null);
+  const id: string = "";
+  const type: ElementType = ElementTypeData.FILE;
+  const label: string = "항목 1";
+  const data: any = {};
 
-  function setElement(value: any) {
-    element.value = value;
-  }
-
-  return { element, setElement };
+  return { id, type, label, data };
 });

@@ -1,18 +1,13 @@
 <script setup lang="ts">
-import { computed, markRaw, defineProps } from "vue";
-import { Element } from "@/types/fastform/Element.js";
+import { computed, markRaw } from "vue";
 import { elementMap } from "./elementData.js";
+import { useElementStore } from "@/stores/elementStore";
 
-const props = defineProps<{
-  elementData: Element;
-}>();
-
+const store = useElementStore();
 const selectedElement = computed(() => {
-  return markRaw(elementMap[props.elementData.type.id].preview);
+  return markRaw(elementMap[store.type.id].component.preview);
 });
 </script>
 <template>
-  <div>
-    <component :is="selectedElement" :elementData="props.elementData" />
-  </div>
+  <component :is="selectedElement" />
 </template>
