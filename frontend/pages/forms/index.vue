@@ -2,7 +2,7 @@
 import ContentCard from "@/components/layout/part/ContentCard.vue";
 </script>
 <template>
-  <ContentCard title="폼 만들기">
+  <ContentCard title="폼 목록">
     <template v-slot:actions>
       <v-btn class="bg-success">저장</v-btn>
     </template>
