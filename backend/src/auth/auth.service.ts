@@ -17,8 +17,8 @@ export class AuthService {
         message: '비밀번호가 다릅니다.',
       };
     }
-
-    const payload = { email: user.email, sub: user._id };
+    const role = user.admin ? 'admin' : 'user';
+    const payload = { email: user.email, sub: user._id, role: role };
     const refreshPayload = { email: user.email, sub: user._id };
     return {
       access_token: this.jwtService.sign(payload),

@@ -11,12 +11,14 @@ const options: SchemaOptions = {
 @Schema(options)
 export class User {
   _id?: Types.ObjectId;
-  @Prop({ required: true, unique: true })
-  userName: string;
   @Prop({ required: true })
+  userName: string;
+  @Prop({ required: true, unique: true })
   email: string;
   @Prop({ required: true })
   password: string;
+  @Prop()
+  admin: boolean;
   @Prop({ default: Date.now, type: mongoose.Schema.Types.Date })
   createdAt?: Date;
   @Prop({ default: Date.now, type: mongoose.Schema.Types.Date })

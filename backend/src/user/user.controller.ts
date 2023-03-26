@@ -3,9 +3,12 @@ import { UserService } from './user.service';
 import { User } from './schema/user.schema';
 import { CreateUserDto } from './dto/create-user.dto';
 import { JwtAuthGuard } from 'src/auth/jwt/jwt.guard';
+import { RoleGuard } from 'src/auth/role/role.guard';
+import { Role } from 'src/auth/role/role.decorator';
 
 @Controller('user')
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard, RoleGuard)
+@Role('admin')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
@@ -27,6 +30,7 @@ export class UserController {
       userName: userData.userName,
       email: userData.email,
       password: userData.password,
+      admin: userData.admin,
     };
 
     return this.userService.createUser(user);
