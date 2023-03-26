@@ -8,16 +8,16 @@ import { MongooseModule } from '@nestjs/mongoose';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: process.env.NDOE_ENV === 'dev' ? '.env.dev' : '.env.prod',
+      envFilePath: [`.env.${process.env.NODE_ENV}`],
     }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (config: ConfigService) => ({
-        uri: config.get('MONGO_URI'),
+        uri: config.get<string>('MONGO_URI'),
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        inject: [ConfigService],
       }),
+      inject: [ConfigService],
     }),
     UserModule,
   ],
