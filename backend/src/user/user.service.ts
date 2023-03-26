@@ -15,4 +15,13 @@ export class UserService {
       console.log(error);
     }
   }
+
+  async createUser(user: User): Promise<any> {
+    try {
+      const result = await this.userModel.create(user);
+      return result;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }

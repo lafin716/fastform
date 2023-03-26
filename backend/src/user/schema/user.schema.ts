@@ -13,9 +13,9 @@ export class User {
   password: string;
 
   @Prop({ default: Date.now, type: mongoose.Schema.Types.Date })
-  createdAt: Date;
+  createdAt?: Date;
   @Prop({ default: Date.now, type: mongoose.Schema.Types.Date })
-  updatedAt: Date;
+  updatedAt?: Date;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
