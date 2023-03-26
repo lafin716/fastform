@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory, SchemaOptions } from '@nestjs/mongoose';
 import mongoose, { Types } from 'mongoose';
 
-export type UserDocument = Element & Document;
+export type ElementDocument = Element & Document;
 
 const options: SchemaOptions = {
   collection: 'elements',

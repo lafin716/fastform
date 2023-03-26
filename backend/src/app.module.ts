@@ -2,9 +2,29 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { UserModule } from './user/user.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { MongooseModule } from '@nestjs/mongoose';
+import { MongooseModule, getModelToken } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { ElementModule } from './element/element.module';
+import { Model } from 'mongoose';
+import { User, UserDocument } from './user/schema/user.schema';
+import { Element, ElementDocument } from './element/schema/element.schema';
+import { AdminModule } from '@adminjs/nestjs';
+import AdminJS from 'adminjs';
+import * as AdminJSMongoose from '@adminjs/mongoose';
+
+AdminJS.registerAdapter(AdminJSMongoose);
+
+const DEFAULT_ADMIN = {
+  email: 'admin@example.com',
+  password: 'password',
+};
+
+const authenticate = async (email: string, password: string) => {
+  if (email === DEFAULT_ADMIN.email && password === DEFAULT_ADMIN.password) {
+    return Promise.resolve(DEFAULT_ADMIN);
+  }
+  return null;
+};
 
 @Module({
   imports: [
@@ -20,6 +40,24 @@ import { ElementModule } from './element/element.module';
         useUnifiedTopology: true,
       }),
       inject: [ConfigService],
+    }),
+    AdminModule.createAdminAsync({
+      imports: [UserModule, ElementModule],
+      inject: [getModelToken(User.name), getModelToken(Element.name)],
+      useFactory: (
+        userModel: Model<UserDocument>,
+        elementModel: Model<ElementDocument>,
+      ) => ({
+        adminJsOptions: {
+          rootPath: '/admin',
+          resources: [{ resource: userModel }, { resource: elementModel }],
+        },
+        auth: {
+          authenticate,
+          cookieName: 'lafin',
+          cookiePassword: '1234',
+        },
+      }),
     }),
     UserModule,
     AuthModule,
