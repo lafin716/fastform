@@ -7,9 +7,18 @@ import { Model } from 'mongoose';
 export class UserService {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
-  async getUser(userName: string): Promise<any> {
+  async getAllUsers(): Promise<User[]> {
     try {
-      const result = await this.userModel.findOne({ userName }).lean();
+      const result = await this.userModel.find().lean();
+      return result;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async getUser(email: string): Promise<User> {
+    try {
+      const result = await this.userModel.findOne({ email }).lean();
       return result;
     } catch (error) {
       console.log(error);
