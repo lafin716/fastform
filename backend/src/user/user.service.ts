@@ -20,22 +20,27 @@ export class UserService {
 
   async getUser(email: string): Promise<any> {
     try {
-      const result = await this.userModel.findOne({ email }).lean();
-      console.log('result', result);
+      const user = await this.userModel.findOne({ email }).lean();
+      console.log('user', user);
+
+      if (!user) {
+        return {
+          result: false,
+          message: '유저를 찾을 수 없습니다.',
+        };
+      }
+
       return {
         result: true,
-        data: {
-          _id: result._id,
-          userName: result.userName,
-          email: result.email,
-          license: result.license,
-          roles: result.roles,
-          createdAt: result.createdAt,
-          updatedAt: result.updatedAt,
-        },
+        data: user,
       };
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      return {
+        result: false,
+        message: '일시적인 오류가 발생하였습니다.',
+        error: error,
+      };
     }
   }
 

@@ -1,5 +1,5 @@
 export type Payload = {
   iss: string;
-  exp: number;
+  email: string;
   roles: string[];
 };
