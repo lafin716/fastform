@@ -22,6 +22,8 @@ export class User extends Document {
   license: UserLicense;
   @Prop()
   roles: string[];
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

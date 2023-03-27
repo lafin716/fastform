@@ -9,7 +9,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 export class UserService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
-  async getAllUsers(): Promise<User[]> {
+  async getAllUsers(): Promise<any[]> {
     try {
       const result = await this.userModel.find().lean();
       return result;
@@ -18,10 +18,22 @@ export class UserService {
     }
   }
 
-  async getUser(email: string): Promise<User> {
+  async getUser(email: string): Promise<any> {
     try {
       const result = await this.userModel.findOne({ email }).lean();
-      return result;
+      console.log('result', result);
+      return {
+        result: true,
+        data: {
+          _id: result._id,
+          userName: result.userName,
+          email: result.email,
+          license: result.license,
+          roles: result.roles,
+          createdAt: result.createdAt,
+          updatedAt: result.updatedAt,
+        },
+      };
     } catch (error) {
       console.log(error);
     }
@@ -53,6 +65,8 @@ export class UserService {
       // 유저 저장 전에 비밀번호를 해싱처리한다.
       user.password = await this.encryptPassword(user.password);
       const result = await this.userModel.create(user);
+      console.log('result', result);
+
       return result;
     } catch (error) {
       console.log(error);
