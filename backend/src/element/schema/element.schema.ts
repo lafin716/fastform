@@ -1,7 +1,5 @@
 import { Prop, Schema, SchemaFactory, SchemaOptions } from '@nestjs/mongoose';
-import mongoose, { Types } from 'mongoose';
-
-export type ElementDocument = Element & Document;
+import { Document, Types } from 'mongoose';
 
 const options: SchemaOptions = {
   collection: 'elements',
@@ -9,7 +7,7 @@ const options: SchemaOptions = {
   _id: true,
 };
 @Schema(options)
-export class Element {
+export class Element extends Document {
   _id?: Types.ObjectId;
   @Prop({ required: true })
   userId: string;
@@ -21,9 +19,7 @@ export class Element {
   password: string;
   @Prop()
   admin: boolean;
-  @Prop({ default: Date.now, type: mongoose.Schema.Types.Date })
   createdAt?: Date;
-  @Prop({ default: Date.now, type: mongoose.Schema.Types.Date })
   updatedAt?: Date;
 }
 

@@ -1,5 +1,5 @@
 export type Payload = {
-  email: string;
-  sub: string;
-  role: string;
+  iss: string;
+  exp: number;
+  roles: string[];
 };

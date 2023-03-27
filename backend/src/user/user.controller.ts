@@ -3,12 +3,12 @@ import { UserService } from './user.service';
 import { User } from './schema/user.schema';
 import { CreateUserDto } from './dto/create-user.dto';
 import { JwtAuthGuard } from 'src/auth/jwt/jwt.guard';
-import { RoleGuard } from 'src/auth/role/role.guard';
-import { Role } from 'src/auth/role/role.decorator';
+import { Roles } from 'src/auth/role/role.decorator';
+import { RolesGuard } from 'src/auth/role/roles.guard';
 
 @Controller('user')
-@UseGuards(JwtAuthGuard, RoleGuard)
-@Role('admin')
+@UseGuards(JwtAuthGuard, RolesGuard)
+@Roles('admin')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
@@ -26,13 +26,8 @@ export class UserController {
 
   @Post()
   createUser(@Body() userData: CreateUserDto) {
-    const user: User = {
-      userName: userData.userName,
-      email: userData.email,
-      password: userData.password,
-      admin: userData.admin,
-    };
+    console.log('controller', userData);
 
-    return this.userService.createUser(user);
+    return this.userService.createUser(userData);
   }
 }

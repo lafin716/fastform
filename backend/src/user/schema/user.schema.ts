@@ -1,15 +1,16 @@
 import { Prop, Schema, SchemaFactory, SchemaOptions } from '@nestjs/mongoose';
-import mongoose, { Document, Types } from 'mongoose';
+import { Document, Types } from 'mongoose';
+import { UserLicense, UserLicenseSchema } from './user.license.schema';
 
-export type UserDocument = User & Document;
-
+// 스키마 옵션
 const options: SchemaOptions = {
   collection: 'users',
   timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' },
   _id: true,
 };
+
 @Schema(options)
-export class User {
+export class User extends Document {
   _id?: Types.ObjectId;
   @Prop({ required: true })
   userName: string;
@@ -17,12 +18,10 @@ export class User {
   email: string;
   @Prop({ required: true })
   password: string;
+  @Prop({ type: UserLicenseSchema })
+  license: UserLicense;
   @Prop()
-  admin: boolean;
-  @Prop({ default: Date.now, type: mongoose.Schema.Types.Date })
-  createdAt?: Date;
-  @Prop({ default: Date.now, type: mongoose.Schema.Types.Date })
-  updatedAt?: Date;
+  roles: string[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

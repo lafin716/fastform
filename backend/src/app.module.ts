@@ -6,8 +6,8 @@ import { MongooseModule, getModelToken } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { ElementModule } from './element/element.module';
 import { Model } from 'mongoose';
-import { User, UserDocument } from './user/schema/user.schema';
-import { Element, ElementDocument } from './element/schema/element.schema';
+import { User } from './user/schema/user.schema';
+import { Element } from './element/schema/element.schema';
 import { AdminModule } from '@adminjs/nestjs';
 import AdminJS from 'adminjs';
 import * as AdminJSMongoose from '@adminjs/mongoose';
@@ -44,10 +44,7 @@ const authenticate = async (email: string, password: string) => {
     AdminModule.createAdminAsync({
       imports: [UserModule, ElementModule],
       inject: [getModelToken(User.name), getModelToken(Element.name)],
-      useFactory: (
-        userModel: Model<UserDocument>,
-        elementModel: Model<ElementDocument>,
-      ) => ({
+      useFactory: (userModel: Model<User>, elementModel: Model<Element>) => ({
         adminJsOptions: {
           rootPath: '/admin',
           resources: [{ resource: userModel }, { resource: elementModel }],

@@ -11,18 +11,23 @@ export class AuthService {
 
   async login(email: string, password: string) {
     const user = await this.userService.getUser(email);
-    if (user.password !== password) {
+    const isAuthed = await this.userService.comparePassword(
+      password,
+      user.password,
+    );
+    console.log('isAuthed', isAuthed);
+
+    if (!isAuthed) {
       return {
         result: false,
         message: '비밀번호가 다릅니다.',
       };
     }
-    const role = user.admin ? 'admin' : 'user';
-    const payload = { email: user.email, sub: user._id, role: role };
-    const refreshPayload = { email: user.email, sub: user._id };
+    const payload = { iss: user.email, sub: user._id, roles: user.roles };
+    const refreshPayload = { iss: user.email, sub: user._id };
     return {
       access_token: this.jwtService.sign(payload),
-      refresh_token: this.jwtService.sign(refreshPayload),
+      refresh_token: this.jwtService.sign(refreshPayload, { expiresIn: '30d' }),
     };
   }
 }

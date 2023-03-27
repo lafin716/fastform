@@ -27,7 +27,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   async validate(payload: Payload) {
     console.log('payload', payload);
 
-    if (!payload.sub) {
+    if (!payload.iss) {
       console.log('접근오류');
       throw new UnauthorizedException('접근오류');
     }
