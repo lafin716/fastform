@@ -9,8 +9,8 @@ export const useElementStore = defineStore("element", () => {
 
   const serialize = () => {
     return {
-      type,
-      label,
+      type: type.id,
+      label: label,
       data,
     };
   };

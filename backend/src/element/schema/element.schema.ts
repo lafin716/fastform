@@ -12,13 +12,11 @@ export class Element extends Document {
   @Prop({ required: true })
   userId: string;
   @Prop({ required: true })
-  userName: string;
-  @Prop({ required: true, unique: true })
-  email: string;
+  type: string;
   @Prop({ required: true })
-  password: string;
+  label: string;
   @Prop()
-  admin: boolean;
+  data?: object;
   createdAt?: Date;
   updatedAt?: Date;
 }
