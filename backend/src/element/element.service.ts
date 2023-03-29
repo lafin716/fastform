@@ -9,7 +9,7 @@ export class ElementService {
     @InjectModel(Element.name) private elementModel: Model<Element>,
   ) {}
 
-  getAllElements() {
+  getAllElements(userId: string) {
     return [];
   }
 
