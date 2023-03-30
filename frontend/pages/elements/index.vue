@@ -2,6 +2,10 @@
 import ContentCard from "@/components/layout/part/ContentCard.vue";
 import { ref } from "vue";
 import { PencilIcon, TrashIcon } from "vue-tabler-icons";
+import { elementApi } from "@/api/elementApi";
+
+const elementDatas = elementApi.getElements();
+console.log("elementDatas", elementDatas);
 
 const headers = ref([
   { text: "라벨", value: "name" },
