@@ -11,16 +11,43 @@ export class ElementService {
   ) {}
 
   getAllElements(userId: string) {
-    console.log(userId);
-    return this.elementModel.find().where('_id').equals(userId);
+    return this.elementModel.find().where('userId').equals(userId);
+  }
+
+  getElement(userId: string, elementId: string) {
+    return this.elementModel
+      .findOne()
+      .where('userId')
+      .equals(userId)
+      .where('_id')
+      .equals(elementId);
   }
 
   createElement(userId: string, dto: CreateElementDto) {
-    const user = new this.elementModel({
-      ...dto,
+    console.log(userId);
+    console.log(dto);
+
+    const element = new this.elementModel({
       userId,
+      ...dto,
     });
 
-    return this.elementModel.create(user);
+    console.log('element', element);
+
+    return this.elementModel.create(element);
+  }
+
+  updateElement(userId: string, elementId: string, dto: CreateElementDto) {
+    return this.elementModel
+      .findOneAndUpdate(
+        {
+          userId,
+          _id: elementId,
+        },
+        {
+          ...dto,
+        },
+      )
+      .lean();
   }
 }

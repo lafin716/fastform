@@ -9,8 +9,8 @@ const options: SchemaOptions = {
 @Schema(options)
 export class Element extends Document {
   _id?: Types.ObjectId;
-  @Prop({ required: true })
-  userId: string;
+  @Prop({ required: true, unique: false })
+  userId: Types.ObjectId;
   @Prop({ required: true })
   type: string;
   @Prop({ required: true })
