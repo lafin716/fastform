@@ -1,6 +1,9 @@
+import { IsString } from 'class-validator';
+
 export class CreateElementDto {
-  userId: string;
+  @IsString()
   type: string;
+  @IsString()
   label: string;
-  data?: object;
+  data?: any;
 }

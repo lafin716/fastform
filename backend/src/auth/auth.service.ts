@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { timestamp } from 'rxjs';
 import { UserService } from 'src/user/user.service';
 import { Payload } from './jwt/jwt.payload';
 
@@ -10,6 +9,15 @@ export class AuthService {
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
   ) {}
+
+  /**
+   * 유저 id 가져오기
+   * @param user Request 객체 안에 있는 인증된 유저 정보
+   * @returns 유저 id
+   */
+  getUserId(user: any) {
+    return user._id;
+  }
 
   /**
    * 토큰 발급
@@ -43,6 +51,11 @@ export class AuthService {
     };
   }
 
+  /**
+   * 리프레시 토큰으로 access_token 발급
+   * @param refreshToken 리프레시 토큰
+   * @returns 리프레시 토큰이 유효하면 access_token, refresh_token을 반환
+   */
   async refreshToken(refreshToken: string) {
     const tokenInfo = this.jwtService.verify(refreshToken);
     const result = await this.userService.getUser(tokenInfo.email);

@@ -15,7 +15,7 @@ export class Element extends Document {
   type: string;
   @Prop({ required: true })
   label: string;
-  @Prop()
+  @Prop({ type: Object })
   data?: object;
   createdAt?: Date;
   updatedAt?: Date;
