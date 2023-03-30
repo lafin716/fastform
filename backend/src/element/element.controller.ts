@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { ElementService } from './element.service';
 import { JwtAuthGuard } from 'src/auth/jwt/jwt.guard';
-import { CreateElementDto } from './dto/cread-element.dto';
+import { CreateElementDto } from './dto/create-element.dto';
 
 @Controller('element')
 @UseGuards(JwtAuthGuard)
@@ -15,7 +15,8 @@ export class ElementController {
   }
 
   @Post()
-  createElement(@Body() body: CreateElementDto) {
-    return this.elementService.createElement(body);
+  createElement(@Body() body: CreateElementDto, @Req() req) {
+    const userId = req.user.iss;
+    return this.elementService.createElement(userId, body);
   }
 }
