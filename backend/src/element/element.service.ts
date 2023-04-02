@@ -28,7 +28,7 @@ export class ElementService {
     console.log(dto);
 
     const element = new this.elementModel({
-      userId,
+      userId: userId,
       ...dto,
     });
 
@@ -48,6 +48,15 @@ export class ElementService {
           ...dto,
         },
       )
+      .lean();
+  }
+
+  deleteElement(userId: string, elementId: string) {
+    return this.elementModel
+      .findOneAndDelete({
+        userId,
+        _id: elementId,
+      })
       .lean();
   }
 }
