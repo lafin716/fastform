@@ -18,4 +18,5 @@ export default defineNuxtConfig({
     serveStatic: true,
   },
   modules: ["@pinia/nuxt"],
+  middleware: ["auth"],
 });

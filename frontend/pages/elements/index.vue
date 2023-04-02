@@ -4,7 +4,14 @@ import { ref } from "vue";
 import { PencilIcon, TrashIcon } from "vue-tabler-icons";
 import { elementApi } from "@/api/elementApi";
 
-const elementDatas = elementApi.getElements();
+const elementDatas = elementApi
+  .getElements()
+  .then((res) => {
+    console.log("res", res);
+  })
+  .catch((err) => {
+    console.log("err", err);
+  });
 console.log("elementDatas", elementDatas);
 
 const headers = ref([
