@@ -1,23 +1,31 @@
 import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from './schema/user.schema';
-import { CreateUserDto } from './dto/create-user.dto';
 import { JwtAuthGuard } from 'src/auth/jwt/jwt.guard';
-import { Roles } from 'src/auth/role/role.decorator';
-import { RolesGuard } from 'src/auth/role/roles.guard';
+import { RegisterUserDto } from './dto/register-user.dto';
 
 @Controller('user')
-@UseGuards(JwtAuthGuard, RolesGuard)
-@Roles('admin')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Get(':email')
-  getUser(@Param('email') email: string): Promise<User> {
+  @Get('find/:email')
+  findUser(@Param('email') email: string) {
     const user = this.userService.getUser(email);
+    if (user['result']) {
+      user['user'] = null;
+      return user;
+    }
     return user;
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Get(':id')
+  getUser(@Param('id') id: string) {
+    const user = this.userService.getUserById(id);
+    return user;
+  }
+
+  @UseGuards(JwtAuthGuard)
   @Get()
   getAllUsers(): Promise<User[]> {
     const users = this.userService.getAllUsers();
@@ -25,9 +33,9 @@ export class UserController {
   }
 
   @Post()
-  createUser(@Body() userData: CreateUserDto) {
-    console.log('controller', userData);
+  createUser(@Body() registerData: RegisterUserDto) {
+    console.log('controller', registerData);
 
-    return this.userService.createUser(userData);
+    return this.userService.registerUser(registerData);
   }
 }
