@@ -33,7 +33,6 @@ export class UserService {
   async getUserById(id: string): Promise<any> {
     try {
       const user = await this.userModel.findById(id).lean();
-      console.log('user', user);
 
       if (!user) {
         return {
@@ -47,7 +46,24 @@ export class UserService {
         data: user,
       };
     } catch (error) {
-      console.log(error);
+      return {
+        result: false,
+        message: '유저를 찾을 수 없습니다.',
+        error: error,
+      };
+    }
+  }
+
+  async isExistsEmail(email: string): Promise<boolean> {
+    try {
+      const user = await this.userModel.findOne({ email }).lean();
+      if (user) {
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error(error);
+      return false;
     }
   }
 
