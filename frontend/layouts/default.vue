@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router';
+import { RouterView } from "vue-router";
+
 const title = ref("FastForm - 유연하고 강력한 폼 제작 도구");
 useHead({
   meta: [{ content: title }],

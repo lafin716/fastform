@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@mdi/font": "^7.2.96",
+    "@nuxtjs/auth": "^4.9.1",
+    "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/vuetify": "^1.12.3",
     "@pinia/nuxt": "^0.4.7",
     "@tiptap/starter-kit": "^2.0.0-beta.220",
