@@ -9,6 +9,7 @@ import { Model } from 'mongoose';
 import { User } from './user/schema/user.schema';
 import { Element } from './element/schema/element.schema';
 import { AdminModule } from '@adminjs/nestjs';
+import { FormModule } from './form/form.module';
 import AdminJS from 'adminjs';
 import * as AdminJSMongoose from '@adminjs/mongoose';
 
@@ -59,6 +60,7 @@ const authenticate = async (email: string, password: string) => {
     UserModule,
     AuthModule,
     ElementModule,
+    FormModule,
   ],
   controllers: [AppController],
   providers: [],

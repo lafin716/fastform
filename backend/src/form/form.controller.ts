@@ -1,2 +1,4 @@
-UseGuards(JwtAuthGuard)
-export class FormController{}
+import { Controller } from '@nestjs/common';
+
+@Controller('form')
+export class FormController {}
