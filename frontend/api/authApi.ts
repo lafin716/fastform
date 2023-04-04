@@ -5,11 +5,15 @@ export const authApi = {
     const { data, error } = await useFetch("/auth/login", {
       method: "POST",
       body: JSON.stringify({ email, password }),
+    }).catch((error) => {
+      console.error(error);
+      return { data: null, error };
     });
     if (error) {
       console.error(error);
+      return { data, error };
     }
 
-    return data;
+    return { data, error };
   },
 };
