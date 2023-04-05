@@ -4,10 +4,14 @@ import { authApi } from "@/api/authApi";
 const isAutoLogin = ref(true);
 const email = ref("");
 const password = ref("");
+const snackbar = useSnackbar();
 
 const login = async (email: string, password: string) => {
   if (!email || !password) {
-    console.log("이메일과 비밀번호를 입력해주세요.");
+    snackbar.add({
+      type: "error",
+      text: "이메일과 비밀번호를 입력해주세요.",
+    });
     return;
   }
   console.log("email", email);
