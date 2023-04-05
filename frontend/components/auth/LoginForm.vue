@@ -12,15 +12,15 @@ const login = async (email: string, password: string) => {
     $toast.error("이메일과 비밀번호를 입력해주세요.");
     return;
   }
-  console.log("email", email);
-  console.log("password", password);
-
   const { data, error } = await authApi.login(email, password);
-  if (error) {
-    console.log("error", error);
+  console.log(data);
+
+  if (!data || error) {
+    $toast.error("일시적인 오류 입니다. " + error.message);
     return;
   }
-  console.log("data", data);
+
+  $toast.success("로그인에 성공했습니다.");
   return;
 };
 </script>
