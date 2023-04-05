@@ -9,7 +9,7 @@ const { $toast } = useNuxtApp();
 
 const login = async (email: string, password: string) => {
   if (!email || !password) {
-    $toast.show("이메일과 비밀번호를 입력해주세요.");
+    $toast.error("이메일과 비밀번호를 입력해주세요.");
     return;
   }
   console.log("email", email);
