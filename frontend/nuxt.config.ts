@@ -12,11 +12,5 @@ export default defineNuxtConfig({
   nitro: {
     serveStatic: true,
   },
-  modules: ["@pinia/nuxt", "nuxt-snackbar"],
-  snackbar: {
-    top: true,
-    right: true,
-    duration: 30000,
-    dense: true,
-  },
+  modules: ["@pinia/nuxt"],
 });
