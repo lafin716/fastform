@@ -7,8 +7,8 @@ import { useElementDataStore } from "@/stores/elementDataStore";
 const store = useElementStore();
 const dataStore = useElementDataStore();
 const saveElement = () => {
-  dataStore.data = store.serialize();
-  console.log(store.serialize());
+  dataStore.save();
+  navigateTo("/elements");
 };
 </script>
 <template>
