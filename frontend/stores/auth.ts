@@ -13,7 +13,11 @@ export const useAuthStore = defineStore("auth", {
   }),
 
   actions: {
-    async autoLogin(accessToken: string) {
+    async autoLogin(accessToken?: string, refreshToken?: string) {
+      if (!accessToken || !refreshToken) {
+        return;
+      }
+
       const response = await authApi.verifyToken(accessToken);
       if (response.error.value) {
         return;
