@@ -21,12 +21,37 @@ export class AuthService {
   }
 
   /**
+   * 토큰으로 유저 정보 가져오기
+   * @param token jwt 토큰
+   * @returns 유저 정보
+   */
+  async getUserInfo(token: string) {
+    const payload = this.jwtService.decode(token) as Payload;
+    const user = await this.userService.getUserById(payload.iss);
+    delete user.data.password;
+    return user.data;
+  }
+
+  /**
    * 토큰 유효성 검사
    * @param token jwt 토큰
    * @returns 토큰 유효 여부
    */
   verifyToken(token: string) {
-    return this.jwtService.verify(token);
+    const isVerify = this.jwtService.verify(token);
+    if (!isVerify) {
+      return {
+        result: false,
+        message: '토큰이 유효하지 않습니다.',
+        error: isVerify,
+      };
+    }
+
+    return {
+      result: true,
+      message: '토큰이 유효합니다.',
+      token: isVerify,
+    };
   }
 
   /**

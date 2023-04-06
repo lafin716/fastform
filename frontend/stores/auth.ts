@@ -3,13 +3,13 @@ import { authApi } from "~~/api/authApi";
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
-    id: ref(""),
-    email: ref(""),
-    name: ref(""),
-    accessToken: ref(""),
-    refreshToken: ref(""),
-    isAuth: ref(false),
-    isAutoLogin: ref(false),
+    id: "",
+    email: "",
+    name: "",
+    accessToken: "",
+    refreshToken: "",
+    isAuth: false,
+    isAutoLogin: false,
   }),
 
   actions: {
@@ -27,12 +27,13 @@ export const useAuthStore = defineStore("auth", {
       if (!data.result) {
         return;
       }
+      console.log("autologin", data.user);
 
-      this.id = data.id;
-      this.email = data.email;
-      this.name = data.name;
-      this.accessToken = data.access_token;
-      this.refreshToken = data.refresh_token;
+      this.id = data.user._id;
+      this.email = data.user.email;
+      this.name = data.user.name;
+      this.accessToken = accessToken;
+      this.refreshToken = refreshToken;
       this.isAuth = true;
     },
 
@@ -58,19 +59,18 @@ export const useAuthStore = defineStore("auth", {
         return;
       }
 
-      this.id = data.id;
+      this.id = data._id;
       this.email = data.email;
       this.name = data.name;
       this.accessToken = data.access_token;
       this.refreshToken = data.refresh_token;
+      this.isAutoLogin = _autoLogin;
       this.isAuth = true;
 
-      // 자동로그인이 설정되어 있는 경우 로컬스토리지에 저장
-      if (_autoLogin) {
-        localStorage.setItem("accessToken", data.access_token);
-        localStorage.setItem("refreshToken", data.refresh_token);
-        this.isAutoLogin = true;
-      }
+      console.log(data.access_token);
+
+      localStorage.setItem("accessToken", data.access_token);
+      localStorage.setItem("refreshToken", data.refresh_token);
     },
   },
 });

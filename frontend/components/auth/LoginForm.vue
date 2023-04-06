@@ -3,8 +3,8 @@ import { ref } from "vue";
 import { useAuthStore } from "~~/stores/auth";
 
 const isAutoLogin = ref(true);
-const email = ref("");
-const password = ref("");
+const email = ref("lafin@naver.com");
+const password = ref("1234");
 const authStore = useAuthStore();
 
 const login = async (email: string, password: string, isAutoLogin: boolean) => {

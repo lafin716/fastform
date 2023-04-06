@@ -2,17 +2,10 @@
 import ContentCard from "@/components/layout/part/ContentCard.vue";
 import { ref } from "vue";
 import { PencilIcon, TrashIcon } from "vue-tabler-icons";
-import { elementApi } from "@/api/elementApi";
+import { useElementListStore } from "~~/stores/elementList";
 
-const elementDatas = elementApi
-  .getElements()
-  .then((res) => {
-    console.log("res", res);
-  })
-  .catch((err) => {
-    console.log("err", err);
-  });
-console.log("elementDatas", elementDatas);
+const elementListStore = useElementListStore();
+elementListStore.getElements();
 
 const headers = ref([
   { text: "라벨", value: "name" },
@@ -21,15 +14,8 @@ const headers = ref([
   { text: "수정일", value: "updated_at" },
 ]);
 
-const items = ref([
-  {
-    id: 1,
-    name: "이름입력",
-    type: "텍스트",
-    created_at: "2021-08-01",
-    updated_at: "2021-08-01",
-  },
-]);
+const items: any = elementListStore.elements;
+console.log(items);
 </script>
 <template>
   <ContentCard title="항목 관리">

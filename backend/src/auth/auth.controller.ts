@@ -12,9 +12,13 @@ export class AuthController {
     const accessToken = token.split(' ')[1];
     try {
       const result = this.authService.verifyToken(accessToken);
+      if (!result.result) {
+        return result;
+      }
+
       return {
-        result: true,
-        token: result,
+        ...result,
+        user: await this.authService.getUserInfo(accessToken),
       };
     } catch (e) {
       return {
