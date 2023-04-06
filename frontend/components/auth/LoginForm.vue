@@ -1,27 +1,15 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { authApi } from "@/api/authApi";
+import { useAuthStore } from "~~/stores/auth";
 
 const isAutoLogin = ref(true);
 const email = ref("");
 const password = ref("");
-const { $toast } = useNuxtApp();
+const authStore = useAuthStore();
 
-const login = async (email: string, password: string) => {
-  if (!email || !password) {
-    $toast.error("이메일과 비밀번호를 입력해주세요.");
-    return;
-  }
-  const { data, error } = await authApi.login(email, password);
-  console.log(data);
-
-  if (!data || error) {
-    $toast.error("일시적인 오류 입니다. " + error.message);
-    return;
-  }
-
-  $toast.success("로그인에 성공했습니다.");
-  return;
+const login = async (email: string, password: string, isAutoLogin: boolean) => {
+  await authStore.login(email, password, isAutoLogin);
+  navigateTo("/");
 };
 </script>
 <template>
@@ -62,7 +50,7 @@ const login = async (email: string, password: string) => {
       </v-col>
       <v-col cols="12" class="pt-0">
         <v-btn
-          @click="login(email, password)"
+          @click="login(email, password, isAutoLogin)"
           color="primary"
           size="large"
           block

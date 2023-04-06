@@ -7,6 +7,24 @@ import { RequestRefreshDto } from './dto/auth.refresh.dto';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  @Post('verify')
+  async verifyToken(@Headers('Authorization') token: string) {
+    const accessToken = token.split(' ')[1];
+    try {
+      const result = this.authService.verifyToken(accessToken);
+      return {
+        result: true,
+        token: result,
+      };
+    } catch (e) {
+      return {
+        result: false,
+        message: '토큰이 유효하지 않습니다.',
+        error: e,
+      };
+    }
+  }
+
   @Post('token')
   async getTokens(@Body() body: RequestTokenDto) {
     return this.authService.getAccessToken(body.email, body.password);

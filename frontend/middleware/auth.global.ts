@@ -9,6 +9,8 @@ export default defineNuxtRouteMiddleware((to, from) => {
     return;
   }
 
+  console.log(authStore.isAuth);
+
   if (!authStore.isAuth) {
     return navigateTo("/auth/login");
   }
