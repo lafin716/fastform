@@ -1,26 +1,23 @@
 <script setup lang="ts">
 import ContentCard from "@/components/layout/part/ContentCard.vue";
-import { ref } from "vue";
+import { ref, computed, markRaw } from "vue";
 import { PencilIcon, TrashIcon } from "vue-tabler-icons";
 import { useElementListStore } from "~~/stores/elementList";
 
 const elementListStore = useElementListStore();
+const items: any = computed(() => {
+  const storeItems = elementListStore.items;
+  return storeItems;
+});
+
 elementListStore.getElements();
-
-const headers = ref([
-  { text: "라벨", value: "name" },
-  { text: "타입", value: "type" },
-  { text: "생성일", value: "created_at" },
-  { text: "수정일", value: "updated_at" },
-]);
-
-const items: any = elementListStore.elements;
-console.log(items);
 </script>
 <template>
   <ContentCard title="항목 관리">
     <template v-slot:actions>
-      <v-btn class="bg-primary">새로 만들기</v-btn>
+      <v-btn class="bg-primary" @click="navigateTo('/elements/add')"
+        >새로 만들기</v-btn
+      >
     </template>
     <template v-slot:contents>
       <v-table class="month-table">
@@ -36,12 +33,12 @@ console.log(items);
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in items" :key="item.name" class="month-item">
+          <tr v-for="(item, index) in items" :key="item._id" class="month-item">
             <td class="text-center">
-              {{ item.id }}
+              {{ index + 1 }}
             </td>
             <td class="text-center">
-              {{ item.name }}
+              {{ item.label }}
             </td>
             <td class="text-center">
               <v-chip
@@ -53,7 +50,7 @@ console.log(items);
               </v-chip>
             </td>
             <td class="text-center">
-              <h6 class="text-body-1 text-muted">{{ item.created_at }}</h6>
+              {{ item.createdAt }}
             </td>
             <td class="text-center">
               <v-btn icon variant="flat">
