@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Form } from './schema/form.schema';
 import { Model } from 'mongoose';
+import { CreateFormDto } from './dto/create-form.dto';
 
 @Injectable()
 export class FormService {
@@ -18,5 +19,9 @@ export class FormService {
       .equals(userId)
       .where('_id')
       .equals(formId);
+  }
+
+  createForm(userId: string, form: CreateFormDto) {
+    return this.formModel.create({ ...form, userId });
   }
 }

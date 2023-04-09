@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ContentCard from "@/components/layout/part/ContentCard.vue";
-import { ref, computed, markRaw } from "vue";
+import { computed } from "vue";
 import { PencilIcon, TrashIcon } from "vue-tabler-icons";
 import { useElementListStore } from "~~/stores/elementList";
 
