@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { elementApi } from "~~/api/elementApi";
-import { useElementStore } from "./elementStore";
+import { useElementStore } from "./front/elementStore";
 
 export const useElementDataStore = defineStore("elementData", {
   state: () => ({

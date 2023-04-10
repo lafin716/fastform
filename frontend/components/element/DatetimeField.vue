@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref, defineProps, computed } from "vue";
-import { ElementMeta } from "@/types/fastform/Element.js";
+import { Element } from "@/types/fastform/Element.js";
 
 const props = defineProps<{
-  elementData: ElementMeta;
+  elementData: Element;
 }>();
 
 const elementData = computed(() => {

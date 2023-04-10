@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useElementStore } from "@/stores/elementStore";
+import { useElementStore } from "@/stores/front/elementStore";
 
 const store = useElementStore();
 </script>

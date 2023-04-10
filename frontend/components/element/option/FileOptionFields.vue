@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useElementStore } from "@/stores/elementStore";
+import { useElementStore } from "@/stores/front/elementStore";
 const store = useElementStore();
 store.data.accept = "*/*";
 store.data.placeholder = "파일을 선택해주세요.";

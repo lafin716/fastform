@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, markRaw } from "vue";
-import { useElementStore } from "@/stores/elementStore";
+import { useElementStore } from "@/stores/front/elementStore";
 import { elementMap } from "@/components/element/elementData";
 
 const store = useElementStore();
