@@ -1,18 +1,21 @@
 <script setup lang="ts">
 import ContentCard from "@/components/layout/part/ContentCard.vue";
-import { ref } from "vue";
 import draggable from "vuedraggable";
 import DraggableArea from "@/components/builder/draggable/DraggableArea.vue";
 import { useFormStore } from "~~/stores/front/formStore";
 
-const layouts = ref([
+const layouts = reactive([
   { id: 1, type: "row", name: "행 레이아웃", icon: "mdi-table-row" },
   { id: 2, type: "col", name: "열 레이아웃", icon: "mdi-table-column" },
 ]);
 
+const nextLayoutId = computed(() => {
+  return layouts.length + 1;
+});
+
 const addLayout = (layout: any) => {
   return {
-    id: layouts.value.length + 1,
+    id: nextLayoutId,
     type: layout.type,
     name: layout.name,
   };
@@ -56,14 +59,16 @@ const formStore = useFormStore();
 }
 .layout-item {
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 0.25rem;
   padding: 10px;
   margin: 10px;
   cursor: grab;
 }
 
 .layout-box {
-  border: 3px solid #ccc;
+  border: 1px solid #e0e0e0;
+  border-radius: 0.25rem;
   min-height: 300px;
+  padding: 0.7rem;
 }
 </style>
