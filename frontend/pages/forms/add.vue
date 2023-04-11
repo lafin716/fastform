@@ -23,11 +23,16 @@ const addLayout = (layout: any) => {
 };
 
 const formStore = useFormStore();
+
+const save = () => {
+  console.log(formStore.currentId);
+  console.log(JSON.parse(JSON.stringify(formStore.elements)));
+};
 </script>
 <template>
   <ContentCard title="폼 만들기">
     <template v-slot:actions>
-      <v-btn class="bg-success">저장</v-btn>
+      <v-btn class="bg-success" @click="save">저장</v-btn>
     </template>
     <template v-slot:contents>
       <div class="layout-bar">

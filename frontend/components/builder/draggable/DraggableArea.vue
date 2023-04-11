@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import draggable from "vuedraggable";
+import OptionBox from "./OptionBox.vue";
 const props = defineProps<{
   value?: [];
   list?: [];
@@ -13,6 +14,9 @@ const realValue = computed(() => {
     <template #item="{ element }">
       <div class="layout-item" :class="element.type">
         <span class="layout-title">{{ element.name }} {{ element.id }}</span>
+        <div class="menu-area">
+          <OptionBox :parentId="element.id" />
+        </div>
         <DraggableArea v-model="element.elements" />
       </div>
     </template>
@@ -46,6 +50,10 @@ const realValue = computed(() => {
   background-color: #f5f5f5;
 }
 
+.layout-item.row {
+  flex: 1 0 0;
+}
+
 .layout-item.row > div {
   display: flex;
   flex-direction: row;
@@ -62,5 +70,11 @@ const realValue = computed(() => {
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+.menu-area {
+  position: absolute;
+  top: -0.5rem;
+  right: 0.5rem;
 }
 </style>
