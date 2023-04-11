@@ -59,7 +59,14 @@ const layoutComponents: any = reactive({
   justify-content: space-between;
 }
 
-.layout-item.col > div {
+.layout-item.col {
   flex: 1 0 0;
+}
+
+.layout-item.col > div {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 </style>
