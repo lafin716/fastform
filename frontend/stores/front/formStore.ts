@@ -9,27 +9,35 @@ export const useFormStore = defineStore("form", {
         type: "row",
         name: "행 레이아웃",
         icon: "mdi-table-row",
-        children: [
+        elements: [
           {
             id: 2,
             type: "col",
             name: "열 레이아웃",
             icon: "mdi-table-column",
-            children: [],
+            elements: [
+              {
+                id: 1,
+                type: "row",
+                name: "행 레이아웃",
+                icon: "mdi-table-row",
+                elements: [],
+              },
+            ],
           },
           {
             id: 3,
             type: "col",
             name: "열 레이아웃",
             icon: "mdi-table-column",
-            children: [],
+            elements: [],
           },
           {
             id: 4,
             type: "col",
             name: "열 레이아웃",
             icon: "mdi-table-column",
-            children: [],
+            elements: [],
           },
         ],
       },

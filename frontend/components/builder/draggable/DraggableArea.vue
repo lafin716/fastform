@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import draggable from "vuedraggable";
+import { VCol, VRow } from "vuetify/components";
 
 const props = defineProps<{
   value?: [];
@@ -8,13 +9,18 @@ const props = defineProps<{
 const realValue = computed(() => {
   return props.value || props.list;
 });
+
+const layoutComponents: any = reactive({
+  row: markRaw(VRow),
+  col: markRaw(VCol),
+});
 </script>
 <template>
   <draggable v-model="realValue" group="people" item-key="id">
     <template #item="{ element }">
       <div class="layout-item" :class="element.type">
         <span class="layout-title">{{ element.name }} {{ element.id }}</span>
-        <DraggableArea v-model="element.children" />
+        <DraggableArea v-model="element.elements" />
       </div>
     </template>
   </draggable>
@@ -22,15 +28,12 @@ const realValue = computed(() => {
 <style scoped>
 .layout-item {
   position: relative;
-  display: flex;
-  align-items: center;
   padding: 0.8rem 1rem;
   margin: 0.5rem 0.5rem;
   border: 1px dashed #646363;
   border-radius: 0.25rem;
   background-color: #fff;
   cursor: move;
-  min-height: 5rem;
 }
 
 .layout-item .layout-title {
@@ -51,17 +54,12 @@ const realValue = computed(() => {
 
 .layout-item.row > div {
   display: flex;
-  align-items: center;
   flex-direction: row;
-}
-
-.layout-item.col {
-  min-width: 10rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .layout-item.col > div {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+  flex: 1 0 0;
 }
 </style>
