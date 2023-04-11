@@ -1,18 +1,11 @@
 <script setup lang="ts">
 import draggable from "vuedraggable";
-import { VCol, VRow } from "vuetify/components";
-
 const props = defineProps<{
   value?: [];
   list?: [];
 }>();
 const realValue = computed(() => {
   return props.value || props.list;
-});
-
-const layoutComponents: any = reactive({
-  row: markRaw(VRow),
-  col: markRaw(VCol),
 });
 </script>
 <template>
@@ -34,6 +27,7 @@ const layoutComponents: any = reactive({
   border-radius: 0.25rem;
   background-color: #fff;
   cursor: move;
+  min-height: 4rem;
 }
 
 .layout-item .layout-title {

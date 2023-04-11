@@ -18,6 +18,7 @@ const addLayout = (layout: any) => {
     id: nextLayoutId,
     type: layout.type,
     name: layout.name,
+    elements: [],
   };
 };
 
