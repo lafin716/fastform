@@ -10,27 +10,31 @@ const items = reactive([
   {
     title: "행 추가",
     type: "row",
-    click: () => {
-      console.log("add row", props.parentId);
-
+    addEvent: () => {
       formStore.addLayout({ type: "row", name: "새 행" }, props.parentId);
     },
   },
   {
     title: "열 추가",
     type: "col",
-    click: () => {
-      console.log("add col", props.parentId);
+    addEvent: () => {
       formStore.addLayout({ type: "col", name: "새 열" }, props.parentId);
     },
   },
 ]);
+
+const removeEvent = () => {
+  formStore.removeLayout(props.parentId);
+};
 </script>
 <template>
   <v-menu location="bottom right">
     <template v-slot:activator="{ props }">
-      <v-btn v-bind="props" size="1rem">
+      <v-btn v-bind="props" size="1rem" class="mr-1">
         <v-icon size="5">mdi-plus</v-icon>
+      </v-btn>
+      <v-btn size="1rem" @click="removeEvent">
+        <v-icon size="5">mdi-close</v-icon>
       </v-btn>
     </template>
 
@@ -39,7 +43,7 @@ const items = reactive([
         v-for="(item, i) in items"
         :key="i"
         :value="i"
-        @click="item.click"
+        @click="item.addEvent"
       >
         <v-list-item-title>
           {{ item.title }}

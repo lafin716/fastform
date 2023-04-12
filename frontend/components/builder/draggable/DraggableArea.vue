@@ -14,9 +14,9 @@ const realValue = computed(() => {
     <template #item="{ element }">
       <div class="layout-item" :class="element.type">
         <span class="layout-title">{{ element.name }} {{ element.id }}</span>
-        <div class="menu-area">
+        <p class="menu-area">
           <OptionBox :parentId="element.id" />
-        </div>
+        </p>
         <DraggableArea v-model="element.elements" />
       </div>
     </template>
@@ -73,6 +73,8 @@ const realValue = computed(() => {
 }
 
 .menu-area {
+  display: flex;
+  flex-direction: row;
   position: absolute;
   top: -0.5rem;
   right: 0.5rem;

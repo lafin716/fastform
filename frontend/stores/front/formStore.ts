@@ -25,6 +25,19 @@ const findFormStoreElement = (
   return undefined;
 };
 
+const recursiveRemove = (parents: FormStoreElement[], id: number) => {
+  return parents
+    .map((item) => {
+      return { ...item };
+    })
+    .filter((item) => {
+      if ("elements" in item) {
+        item.elements = recursiveRemove(item.elements, id);
+      }
+      return item.id !== id;
+    });
+};
+
 export const useFormStore = defineStore("form", {
   state: () => ({
     currentId: 1,
@@ -62,6 +75,12 @@ export const useFormStore = defineStore("form", {
       if (!foundParent) return;
       foundParent.elements.push(newLayout);
       this.currentId = this.nextLayoutId;
+    },
+
+    removeLayout(id: number) {
+      const removedElements = recursiveRemove(this.elements, id);
+      console.log(removedElements);
+      this.elements = removedElements;
     },
   },
 

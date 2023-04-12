@@ -22,6 +22,8 @@ const addLayout = (layout: any) => {
   };
 };
 
+const showLayout = ref(false);
+
 const formStore = useFormStore();
 
 const save = () => {
@@ -35,7 +37,7 @@ const save = () => {
       <v-btn class="bg-success" @click="save">저장</v-btn>
     </template>
     <template v-slot:contents>
-      <div class="layout-bar">
+      <div class="layout-bar" v-if="showLayout">
         <draggable
           v-model="layouts"
           :group="{ name: 'people', pull: 'clone', put: false }"
