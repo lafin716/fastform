@@ -3,6 +3,8 @@ import ContentCard from "@/components/layout/part/ContentCard.vue";
 import draggable from "vuedraggable";
 import DraggableArea from "@/components/builder/draggable/DraggableArea.vue";
 import { useFormStore } from "~~/stores/front/formStore";
+import PartialCard from "~~/components/layout/part/PartialCard.vue";
+import { useElementListStore } from "~~/stores/elementList";
 
 const layouts = reactive([
   { id: 1, type: "row", name: "행 레이아웃", icon: "mdi-table-row" },
@@ -21,25 +23,39 @@ const addLayout = (layout: any) => {
     elements: [],
   };
 };
-
+const elementListStore = useElementListStore();
+elementListStore.getElements();
 const showLayout = ref(false);
-
 const formStore = useFormStore();
-
 const save = () => {
   console.log(formStore.currentId);
   console.log(JSON.parse(JSON.stringify(formStore.elements)));
 };
 </script>
 <template>
-  <ContentCard title="폼 만들기">
+  <ContentCard title="폼 만들기" :grid="9">
     <template v-slot:actions>
       <v-btn class="bg-success" @click="save">저장</v-btn>
     </template>
-    <template v-slot:contents>
+    <template v-slot:headers>
       <div class="element-bar">
-        <h2>엘리먼트 추가</h2>
+        <draggable
+          v-model="elementListStore.elements"
+          :group="{ name: 'people', pull: 'clone', put: false }"
+          :clone="addLayout"
+          :sort="false"
+          item-key="id"
+        >
+          <template #item="{ element }">
+            <div class="layout-item">
+              <v-icon class="mr-2">{{ element.icon }}</v-icon>
+              <span>{{ element.name }}</span>
+            </div>
+          </template>
+        </draggable>
       </div>
+    </template>
+    <template v-slot:contents>
       <div class="layout-bar" v-if="showLayout">
         <draggable
           v-model="layouts"
@@ -81,5 +97,9 @@ const save = () => {
   border-radius: 0.25rem;
   min-height: 300px;
   padding: 0.7rem;
+}
+
+.element-bar {
+  overflow-x: auto;
 }
 </style>

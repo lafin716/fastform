@@ -1,6 +1,14 @@
 import { defineStore } from "pinia";
 import { elementApi } from "@/api/elementApi";
 
+export interface Element {
+  _id: string;
+  userId: string;
+  type: string;
+  label: string;
+  data: any;
+}
+
 export const useElementListStore = defineStore("elementList", {
   state: () => ({
     elements: [] as any,
@@ -15,8 +23,11 @@ export const useElementListStore = defineStore("elementList", {
         return;
       }
 
-      console.log("elements", response.data.value);
-      this.elements = response.data.value ?? [];
+      if (response.data.value === null) {
+        return;
+      }
+
+      this.elements = response.data.value;
     },
   },
 

@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { defineProps, computed } from "vue";
-const props = defineProps<{ title: string }>();
+const props = defineProps<{
+  title: string;
+  grid: number;
+}>();
 const title = computed(() => {
   if (!props.title) {
     return "";
@@ -11,7 +14,7 @@ const title = computed(() => {
 </script>
 <template>
   <v-row>
-    <v-col cols="12">
+    <v-col :cols="grid">
       <v-card elevation="10" class="withbg">
         <v-card-item>
           <div class="d-sm-flex align-center justify-space-between pt-sm-2">
@@ -21,9 +24,6 @@ const title = computed(() => {
             <div class="my-sm-0 pr-2">
               <slot name="actions"></slot>
             </div>
-          </div>
-          <div class="mt-6">
-            <slot name="headers"></slot>
           </div>
           <div class="mt-6">
             <slot name="contents"></slot>
