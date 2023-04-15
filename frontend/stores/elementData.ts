@@ -59,5 +59,43 @@ export const useElementDataStore = defineStore("elementData", {
 
       $toast.success("저장되었습니다.");
     },
+
+    async update(id: string) {
+      const { $toast } = useNuxtApp();
+      const store = useElementStore();
+      this.type = store.type.id;
+      this.label = store.label;
+      this.data = store.data ?? {};
+
+      if (!this.type || !this.label) {
+        $toast.error("데이터를 입력해주세요.");
+        return;
+      }
+
+      const data = {
+        type: this.type,
+        label: this.label,
+        data: this.data,
+      };
+
+      const response = await elementApi.updateElement(id, data);
+      if (response.error.value) {
+        $toast.error("일시적인 오류 입니다. \n" + response.error.value.message);
+        return;
+      }
+
+      $toast.success("저장되었습니다.");
+    },
+
+    async delete(id: string) {
+      const { $toast } = useNuxtApp();
+      const response = await elementApi.deleteElement(id);
+      if (response.error.value) {
+        $toast.error("일시적인 오류 입니다. \n" + response.error.value.message);
+        return;
+      }
+
+      $toast.success("삭제되었습니다.");
+    },
   },
 });

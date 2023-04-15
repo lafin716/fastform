@@ -2,18 +2,15 @@
 import ContentCard from "@/components/layout/part/ContentCard.vue";
 import { ElementTypeData } from "@/components/element/elementData";
 import { useElementStore } from "@/stores/front/elementStore";
-import { useElementDataStore } from "@/stores/elementDataStore";
+import { useElementDataStore } from "@/stores/elementData";
 
 const { params } = useRoute();
 const id = params.id as string;
+console.log(params);
+
 const store = useElementStore();
 const dataStore = useElementDataStore();
 const element = dataStore.getOne(id);
-store.setElement({
-  type: dataStore.type,
-  label: dataStore.label,
-  data: dataStore.data,
-});
 
 const saveElement = () => {
   dataStore.save();

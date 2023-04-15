@@ -3,6 +3,7 @@ import ContentCard from "@/components/layout/part/ContentCard.vue";
 import { computed } from "vue";
 import { PencilIcon, TrashIcon } from "vue-tabler-icons";
 import { useElementListStore } from "~~/stores/elementList";
+import { useElementDataStore } from "~~/stores/elementData";
 
 const elementListStore = useElementListStore();
 const items: any = computed(() => {
@@ -11,6 +12,15 @@ const items: any = computed(() => {
 });
 
 elementListStore.getElements();
+
+const elementDataStore = useElementDataStore();
+const confirmRemove = (id: string) => {
+  const result = confirm("정말 삭제하시겠습니까?");
+  if (result) {
+    elementDataStore.delete(id);
+    elementListStore.getElements();
+  }
+};
 </script>
 <template>
   <ContentCard title="항목 관리">
@@ -60,8 +70,21 @@ elementListStore.getElements();
                 />
               </v-btn>
               <v-btn icon variant="flat">
-                <TrashIcon class="text-error" />
+                <TrashIcon
+                  class="text-error"
+                  @click="confirmRemove(item._id)"
+                />
               </v-btn>
+            </td>
+          </tr>
+          <tr v-if="!items">
+            <td colspan="5" class="text-center">
+              <v-progress-circular indeterminate color="primary" />
+            </td>
+          </tr>
+          <tr v-if="items.length === 0">
+            <td colspan="5" class="text-center">
+              <v-chip color="white" size="small"> 항목이 없습니다. </v-chip>
             </td>
           </tr>
         </tbody>

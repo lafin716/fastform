@@ -11,6 +11,7 @@
     "nuxt": "^3.3.1"
   },
   "dependencies": {
+    "@builder.io/vue": "^0.1.12",
     "@he-tree/vue": "^2.4.0",
     "@mdi/font": "^7.2.96",
     "@nuxtjs/auth": "^4.9.1",

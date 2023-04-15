@@ -2,7 +2,7 @@
 import ContentCard from "@/components/layout/part/ContentCard.vue";
 import { ElementTypeData } from "@/components/element/elementData";
 import { useElementStore } from "@/stores/front/elementStore";
-import { useElementDataStore } from "@/stores/elementDataStore";
+import { useElementDataStore } from "@/stores/elementData";
 
 const store = useElementStore();
 const dataStore = useElementDataStore();

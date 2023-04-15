@@ -46,4 +46,15 @@ export const elementApi = {
     });
     return response;
   },
+
+  async deleteElement(id: string) {
+    const auth = useAuthStore();
+    const response = await useFetch(`/api/element/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: "Bearer " + auth.accessToken,
+      },
+    });
+    return response;
+  },
 };
