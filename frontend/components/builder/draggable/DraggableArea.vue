@@ -17,7 +17,7 @@ const realValue = computed(() => {
         <p class="menu-area">
           <OptionBox :parentId="element.id" />
         </p>
-        <DraggableArea v-model="element.elements" />
+        <DraggableArea v-model="element.layouts" />
       </div>
     </template>
   </draggable>

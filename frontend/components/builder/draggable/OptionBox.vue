@@ -33,7 +33,7 @@ const removeEvent = () => {
       <v-btn v-bind="props" size="1rem" class="mr-1">
         <v-icon size="5">mdi-plus</v-icon>
       </v-btn>
-      <v-btn size="1rem" @click="removeEvent" v-if="parentId !== 1">
+      <v-btn size="1rem" @click="removeEvent" v-if="parentId > 0">
         <v-icon size="5">mdi-close</v-icon>
       </v-btn>
     </template>
