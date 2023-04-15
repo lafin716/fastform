@@ -2,6 +2,12 @@ import { defineStore } from "pinia";
 import { elementApi } from "~~/api/elementApi";
 import { useElementStore } from "./front/elementStore";
 
+export interface ElementData {
+  type: string;
+  label: string;
+  data: any;
+}
+
 export const useElementDataStore = defineStore("elementData", {
   state: () => ({
     type: "",
@@ -10,6 +16,23 @@ export const useElementDataStore = defineStore("elementData", {
   }),
 
   actions: {
+    async getOne(id: string) {
+      const { $toast } = useNuxtApp();
+      const response = await elementApi.getElement(id);
+      if (response.error.value) {
+        $toast.error("일시적인 오류 입니다. \n" + response.error.value.message);
+        return;
+      }
+
+      if (!response.data.value) {
+        $toast.error("일시적인 오류 입니다. 잠시 후 다시 시도해주세요.");
+        return;
+      }
+
+      this.type = response.data.value.type;
+      this.label = response.data.value.label;
+      this.data = response.data.value.data;
+    },
     async save() {
       const { $toast } = useNuxtApp();
       const store = useElementStore();

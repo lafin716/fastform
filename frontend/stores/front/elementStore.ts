@@ -3,9 +3,9 @@ import { ElementTypeData } from "~~/components/element/elementData";
 import { ElementType } from "~~/types/fastform/Element";
 
 export const useElementStore = defineStore("element", () => {
-  const type: ElementType = ElementTypeData.TEXT;
-  const label: string = "항목 1";
-  const data: any = {};
+  let type: ElementType = ElementTypeData.TEXT;
+  let label: string = "항목 1";
+  let data: any = {};
 
   const serialize = () => {
     return {
@@ -13,6 +13,12 @@ export const useElementStore = defineStore("element", () => {
       label: label,
       data,
     };
+  };
+
+  const setElement = (element: any) => {
+    type = element.type;
+    label = element.label;
+    data = element.data;
   };
 
   return { type, label, data, serialize };

@@ -54,7 +54,10 @@ elementListStore.getElements();
             </td>
             <td class="text-center">
               <v-btn icon variant="flat">
-                <PencilIcon class="text-info" />
+                <PencilIcon
+                  class="text-info"
+                  @click="navigateTo(`/elements/${item._id}`)"
+                />
               </v-btn>
               <v-btn icon variant="flat">
                 <TrashIcon class="text-error" />
