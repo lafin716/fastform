@@ -48,18 +48,10 @@ const getRemovedLayouts = (parents: FormLayout[], id: number) => {
 
 export const useFormStore = defineStore("form", {
   state: () => ({
-    currentId: 1,
+    currentId: 0,
     name: "",
     userId: "",
-    layouts: <FormLayout[]>[
-      {
-        id: 1,
-        type: "row",
-        name: "행",
-        layouts: [],
-        elements: [],
-      },
-    ],
+    layouts: <FormLayout[]>[],
     elements: <FormElement[]>[],
   }),
 

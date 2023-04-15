@@ -7,24 +7,6 @@ import { useElementListStore } from "~~/stores/elementList";
 import TextIcon from "~~/components/shared/TextIcon.vue";
 import OptionBox from "~~/components/builder/draggable/OptionBox.vue";
 
-const layouts = reactive([
-  { id: 1, type: "row", name: "행 레이아웃", icon: "mdi-table-row" },
-  { id: 2, type: "col", name: "열 레이아웃", icon: "mdi-table-column" },
-]);
-
-const nextLayoutId = computed(() => {
-  return layouts.length + 1;
-});
-
-const addLayout = (layout: any) => {
-  return {
-    id: nextLayoutId,
-    type: layout.type,
-    name: layout.name,
-    elements: [],
-  };
-};
-const showLayout = ref(false);
 const formStore = useFormStore();
 const save = () => {
   console.log(formStore.currentId);
@@ -40,11 +22,11 @@ elementListStore.getElements();
       <v-btn class="bg-success" @click="save">저장</v-btn>
     </template>
     <template v-slot:headers>
-      <div class="d-flex row">
+      <v-slide-group>
         <draggable
           v-model="elementListStore.elements"
           :group="{ name: 'people', pull: 'clone', put: false }"
-          :clone="addLayout"
+          :clone="formStore.addElement"
           :sort="false"
           item-key="id"
           class="d-flex row scroll-x"
@@ -56,25 +38,9 @@ elementListStore.getElements();
             </div>
           </template>
         </draggable>
-      </div>
+      </v-slide-group>
     </template>
     <template v-slot:contents>
-      <div class="layout-bar" v-if="showLayout">
-        <draggable
-          v-model="layouts"
-          :group="{ name: 'people', pull: 'clone', put: false }"
-          :clone="addLayout"
-          :sort="false"
-          item-key="id"
-        >
-          <template #item="{ element }">
-            <div class="layout-item">
-              <v-icon class="mr-2">{{ element.icon }}</v-icon>
-              <span>{{ element.name }}</span>
-            </div>
-          </template>
-        </draggable>
-      </div>
       <v-spacer class="my-3"></v-spacer>
       <div class="layout-box">
         <p class="menu-area">
