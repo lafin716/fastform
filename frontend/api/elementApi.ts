@@ -1,11 +1,12 @@
 import { useFetch } from "nuxt/app";
 import { useAuthStore } from "~~/stores/auth";
+import { Element } from "~~/types/builder/Element";
 
 export const elementApi = {
   async getElements() {
     const auth = useAuthStore();
     console.log(auth.accessToken);
-    const response = await useFetch("/api/element", {
+    const response = await useFetch<Element[]>("/api/element", {
       headers: {
         Authorization: "Bearer " + auth.accessToken,
       },

@@ -3,9 +3,11 @@ import ContentCard from "@/components/layout/part/ContentCard.vue";
 import { ElementTypeData } from "@/components/element/elementData";
 import { useElementStore } from "@/stores/front/elementStore";
 import { useElementDataStore } from "@/stores/elementData";
+import { ElementTypeList } from "~~/types/builder/Element";
 
 const store = useElementStore();
 const dataStore = useElementDataStore();
+const elementStore = useElementStore();
 const saveElement = () => {
   dataStore.save();
   navigateTo("/elements");
@@ -18,26 +20,6 @@ const saveElement = () => {
         <v-btn class="bg-success" @click="saveElement">저장</v-btn>
       </template>
       <template v-slot:contents>
-        <v-row class="ml-0 mr-0">
-          <v-col cols="6" xs12>
-            <v-select
-              v-model="store.type"
-              :items="Object.values(ElementTypeData)"
-              item-title="label"
-              item-value="id"
-              label="타입"
-              variant="outlined"
-              return-object
-            />
-          </v-col>
-          <v-col cols="6">
-            <v-text-field
-              v-model="store.label"
-              label="라벨"
-              variant="outlined"
-            />
-          </v-col>
-        </v-row>
         <ElementField />
       </template>
     </ContentCard>

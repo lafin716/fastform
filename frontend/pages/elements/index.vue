@@ -2,23 +2,25 @@
 import ContentCard from "@/components/layout/part/ContentCard.vue";
 import { computed } from "vue";
 import { PencilIcon, TrashIcon } from "vue-tabler-icons";
-import { useElementListStore } from "~~/stores/elementList";
 import { useElementDataStore } from "~~/stores/elementData";
+import { useElementStore } from "~~/stores/elementStore";
 
-const elementListStore = useElementListStore();
+const elementStore = useElementStore();
 const items: any = computed(() => {
-  const storeItems = elementListStore.items;
+  const storeItems = elementStore.elements;
+  console.log(storeItems);
+
   return storeItems;
 });
 
-elementListStore.getElements();
+elementStore.getElements();
 
 const elementDataStore = useElementDataStore();
 const confirmRemove = (id: string) => {
   const result = confirm("정말 삭제하시겠습니까?");
   if (result) {
     elementDataStore.delete(id);
-    elementListStore.getElements();
+    elementStore.getElements();
   }
 };
 </script>
