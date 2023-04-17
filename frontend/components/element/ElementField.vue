@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { computed, markRaw } from "vue";
 import { useElementStore } from "@/stores/elementStore";
-import { ElementTypeData, elementMap } from "@/components/element/elementData";
-import { ElementTypeList } from "~~/types/builder/Element";
+import { elementFieldSet } from "./elementData";
 
 const selectedType = reactive(ElementTypeData.TEXT);
 const store = useElementStore();
@@ -20,7 +19,7 @@ const selectedOptionField = computed(() => {
     <v-col cols="6" xs12>
       <v-select
         v-model="store.preview.type"
-        :items="Object.values(ElementTypeData)"
+        :items="Object.values(elementFieldSet)"
         item-title="label"
         item-value="id"
         label="타입"

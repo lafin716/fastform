@@ -3,22 +3,15 @@ import * as ElementOption from "./ElementOption";
 enum ElementType {
   Text = "text",
   TextArea = "textarea",
+  Password = "password",
+  Email = "email",
+  Number = "number",
   Select = "select",
   Radio = "radio",
   Checkbox = "checkbox",
   File = "file",
   Image = "image",
 }
-
-const ElementTypeList = [
-  { value: ElementType.Text, label: "텍스트박스" },
-  { value: ElementType.TextArea, label: "텍스트에어리어" },
-  { value: ElementType.Select, label: "셀렉트박스" },
-  { value: ElementType.Radio, label: "라디오버튼" },
-  { value: ElementType.Checkbox, label: "체크박스" },
-  { value: ElementType.File, label: "파일업로드" },
-  { value: ElementType.Image, label: "이미지업로드" },
-];
 
 interface Element {
   id: string;
@@ -30,6 +23,21 @@ interface Element {
 interface TextElement extends Element {
   type: ElementType.Text;
   options?: ElementOption.TextElementOption;
+}
+
+interface PasswordElement extends Element {
+  type: ElementType.Password;
+  options?: ElementOption.PasswordElementOption;
+}
+
+interface EmailElement extends Element {
+  type: ElementType.Email;
+  options?: ElementOption.EmailElementOption;
+}
+
+interface NumberElement extends Element {
+  type: ElementType.Number;
+  options?: ElementOption.NumberElementOption;
 }
 
 interface TextAreaElement extends Element {
@@ -63,7 +71,6 @@ interface ImageElement extends Element {
 }
 
 export {
-  ElementTypeList,
   ElementType,
   Element,
   TextElement,

@@ -1,15 +1,9 @@
 <script setup lang="ts">
 import ContentCard from "@/components/layout/part/ContentCard.vue";
-import { ElementTypeData } from "@/components/element/elementData";
 import { useElementStore } from "@/stores/front/elementStore";
-import { useElementDataStore } from "@/stores/elementData";
-import { ElementTypeList } from "~~/types/builder/Element";
 
 const store = useElementStore();
-const dataStore = useElementDataStore();
-const elementStore = useElementStore();
 const saveElement = () => {
-  dataStore.save();
   navigateTo("/elements");
 };
 </script>

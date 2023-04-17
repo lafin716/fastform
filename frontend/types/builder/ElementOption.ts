@@ -9,6 +9,28 @@ interface TextElementOption extends ElementOption {
   pattern?: string;
 }
 
+interface PasswordElementOption extends ElementOption {
+  placeholder?: string;
+  maxLength?: number;
+  minLength?: number;
+  pattern?: string;
+}
+
+interface EmailElementOption extends ElementOption {
+  placeholder?: string;
+  maxLength?: number;
+  minLength?: number;
+}
+
+interface NumberElementOption extends ElementOption {
+  placeholder?: string;
+  maxLength?: number;
+  minLength?: number;
+  minSize?: number;
+  maxSize?: number;
+  pattern?: string;
+}
+
 interface TextAreaElementOption extends ElementOption {
   placeholder?: string;
   maxLength?: number;
@@ -57,6 +79,9 @@ interface ImageElementOption extends ElementOption {
 export {
   ElementOption,
   TextElementOption,
+  PasswordElementOption,
+  EmailElementOption,
+  NumberElementOption,
   TextAreaElementOption,
   SelectElementOption,
   SelectElementOptionItem,

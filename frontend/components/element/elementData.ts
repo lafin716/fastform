@@ -1,4 +1,3 @@
-import { ElementType, TextElement } from "@/types/fastform/Element.js";
 import TextField from "./TextField.vue";
 import TextAreaField from "./TextAreaField.vue";
 import PasswordField from "./PasswordField.vue";
@@ -18,104 +17,67 @@ import RadioOptionFields from "./option/RadioOptionFields.vue";
 import CheckboxOptionFields from "./option/CheckboxOptionFields.vue";
 import FileOptionFields from "./option/FileOptionFields.vue";
 import ImageOptionFields from "./option/ImageOptionFields.vue";
+import { ElementType } from "~~/types/builder/Element";
 
-export type ElementTypeMap = {
-  [key: string]: ElementType;
-};
-
-export const ElementTypeData: ElementTypeMap = {
-  TEXT: <ElementType>{ id: "text", label: "텍스트", data: {} },
-  TEXTAREA: <ElementType>{ id: "textarea", label: "텍스트박스" },
-  PASSWORD: <ElementType>{ id: "password", label: "비밀번호" },
-  EMAIL: <ElementType>{ id: "email", label: "이메일" },
-  NUMBER: <ElementType>{ id: "number", label: "숫자" },
-  DATE: <ElementType>{ id: "date", label: "날짜" },
-  TIME: <ElementType>{ id: "time", label: "시간" },
-  DATETIME: <ElementType>{ id: "datetime", label: "날짜/시간" },
-  CHECKBOX: <ElementType>{ id: "checkbox", label: "체크박스" },
-  RADIO: <ElementType>{ id: "radio", label: "라디오버튼" },
-  SELECT: <ElementType>{ id: "select", label: "셀렉트박스" },
-  FILE: <ElementType>{ id: "file", label: "파일첨부" },
-  IMAGE: <ElementType>{ id: "image", label: "이미지첨부" },
-};
-
-export const elementMap = {
-  [ElementTypeData.TEXT.id]: {
-    component: {
-      option: TextOptionFields,
-      preview: TextField,
-    },
+export const elementFieldSet = {
+  [ElementType.Text]: {
+    id: ElementType.Text,
+    label: "텍스트",
+    preview: TextField,
+    option: TextOptionFields,
   },
-  [ElementTypeData.TEXTAREA.id]: {
-    component: {
-      option: TextOptionFields,
-      preview: TextAreaField,
-    },
+  [ElementType.Password]: {
+    id: ElementType.Password,
+    label: "비밀번호",
+    preview: PasswordField,
+    option: TextOptionFields,
   },
-  [ElementTypeData.PASSWORD.id]: {
-    component: {
-      option: TextOptionFields,
-      preview: PasswordField,
-    },
+  [ElementType.Email]: {
+    id: ElementType.Email,
+    label: "이메일",
+    preview: EmailField,
+    option: TextOptionFields,
   },
-  [ElementTypeData.EMAIL.id]: {
-    component: {
-      option: TextOptionFields,
-      preview: EmailField,
-    },
+  [ElementType.Number]: {
+    id: ElementType.Number,
+    label: "숫자",
+    preview: NumberField,
+    option: TextOptionFields,
   },
-  [ElementTypeData.NUMBER.id]: {
-    component: {
-      option: TextOptionFields,
-      preview: NumberField,
-    },
+  [ElementType.TextArea]: {
+    id: ElementType.TextArea,
+    label: "텍스트박스",
+    preview: TextAreaField,
+    option: TextOptionFields,
   },
-  [ElementTypeData.DATE.id]: {
-    component: {
-      option: TextOptionFields,
-      preview: DateField,
-    },
+  [ElementType.Checkbox]: {
+    id: ElementType.Checkbox,
+    label: "체크박스",
+    preview: CheckboxField,
+    option: CheckboxOptionFields,
   },
-  [ElementTypeData.TIME.id]: {
-    component: {
-      option: TextOptionFields,
-      preview: TimeField,
-    },
+  [ElementType.Radio]: {
+    id: ElementType.Radio,
+    label: "라디오버튼",
+    preview: RadioField,
+    option: RadioOptionFields,
   },
-  [ElementTypeData.DATETIME.id]: {
-    component: {
-      option: TextOptionFields,
-      preview: DatetimeField,
-    },
+  [ElementType.Select]: {
+    id: ElementType.Select,
+    label: "셀렉트박스",
+    preview: SelectField,
+    option: SelectOptionFields,
   },
-  [ElementTypeData.CHECKBOX.id]: {
-    component: {
-      option: CheckboxOptionFields,
-      preview: CheckboxField,
-    },
+  [ElementType.File]: {
+    id: ElementType.File,
+    label: "파일첨부",
+    preview: FileField,
+    option: FileOptionFields,
   },
-  [ElementTypeData.RADIO.id]: {
-    component: {
-      option: RadioOptionFields,
-      preview: RadioField,
-    },
-  },
-  [ElementTypeData.SELECT.id]: {
-    component: {
-      option: SelectOptionFields,
-      preview: SelectField,
-    },
-  },
-  [ElementTypeData.FILE.id]: {
-    component: {
-      option: FileOptionFields,
-      preview: FileField,
-    },
-  },
-  [ElementTypeData.IMAGE.id]: {
-    component: {
-      option: ImageOptionFields,
-      preview: ImageField,
-    },
+  [ElementType.Image]: {
+    id: ElementType.Image,
+    label: "이미지첨부",
+    preview: ImageField,
+    option: ImageOptionFields,
   },
 };
